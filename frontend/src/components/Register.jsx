@@ -8,6 +8,32 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [, setToken] = useContext(UserContext);
 
+  const submitRegistration = async () => {
+    const requestOptions = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({email: email, hashed_password: password}),
+    };
+
+    const response = await fetch("/api/users", requestOptions);
+    const data = await response.json();
+
+    if (!response.ok) {
+      setErrorMessage(data.detail);
+    } else {
+      setToken(data.access_token);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password === confirmationPassword && password.length > 8) {
+      submitRegistration();
+    } else {
+      setErrorMessage("Password needs to be greater than 8 characters and to match");
+    }
+  };
+
   return (
     <div className="column">
       <form className="box">
