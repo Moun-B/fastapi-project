@@ -66,7 +66,7 @@ async def delete_lead(
     db: _orm.Session=_fastapi.Depends(_services.get_db),
 ):
     await _services.delete_lead(lead_id, user, db)
-    return {"message", "Lead Deleted"}
+    return {"message": "Lead Deleted"}
 
 
 @app.put("/api/leads/{lead_id}", status_code=200)
@@ -77,4 +77,8 @@ async def update_lead(
     db: _orm.Session=_fastapi.Depends(_services.get_db),
 ):
     await _services.update_lead(lead_id, lead, user, db)
-    return {"message", "Lead Updated"}
+    return {"message": "Lead Updated"}
+
+@app.get("/api")
+async def root():
+    return {"message": "Welcome to our API"}
