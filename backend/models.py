@@ -27,4 +27,4 @@ class Lead(_database.Base):
     date_created = _sql.Column(_sql.DateTime, default=_dt.datetime.utcnow)
     last_updated = _sql.Column(_sql.DateTime, default=_dt.datetime.utcnow)
 
-    ower = _orm.relationship("User", back_populates="leads")
+    owner = _orm.relationship("User", back_populates="leads")
