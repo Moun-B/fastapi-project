@@ -57,4 +57,4 @@ async def get_lead(
     user: _schemas.User=_fastapi.Depends(_services.get_current_user),
     db: _orm.Session=_fastapi.Depends(_services.get_db),
 ):
-    pass
+    return await _services.get_lead(lead_id, user, db)
