@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import UserContext from "./context/UserContext";
+import {UserContext} from "./context/UserContext";
 import Register from "./components/Register";
 import Header from "./components/Header";
 
