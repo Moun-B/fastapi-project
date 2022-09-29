@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
+import ErrorMessage from "./ErrorMessage";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -36,7 +37,7 @@ const Register = () => {
 
   return (
     <div className="column">
-      <form className="box">
+      <form className="box" onSubmit={handleSubmit}>
         <h1 className="title has-text-centered">Register</h1>
         <div className="field">
           <label className="label">Email Address</label>
@@ -77,6 +78,8 @@ const Register = () => {
              />
           </div>
         </div>
+        <ErrorMessage message={errorMessage}/>
+        <br/>
         <button className="button is-primary" type="submit">
           Register
         </button>
