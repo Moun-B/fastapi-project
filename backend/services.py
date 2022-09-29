@@ -27,7 +27,7 @@ async def create_user(user: _schemas.UserCreate, db: _orm.Session):
     return user_obj
 
 async def authenticate_user(email: str, password: str, db: _orm.Session):
-    user = await get_user_by_email(db, email)
+    user = await get_user_by_email(email, db)
 
     if not user:
         return False
