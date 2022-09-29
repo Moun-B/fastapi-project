@@ -36,4 +36,4 @@ async def create_lead(lead: _schemas.LeadCreate, user: _schemas.User=_fastapi.De
 
 @app.get("/api/leads", response_model=List[_schemas.Lead])
 async def get_leads(lead: _schemas.LeadCreate, user: _schemas.User=_fastapi.Depends(_services.get_current_user), db: _orm.Session=_fastapi.Depends(_services.get_db)):
-    pass
+    return await _services.get_leads(user=user, db=db)
