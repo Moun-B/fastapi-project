@@ -90,7 +90,7 @@ async def get_lead(lead_id: int, user: _schemas.User, db: _orm.Session):
 async def delete_lead(lead_id: int, user: _schemas.User, db: _orm.Session):
     lead = await _lead_selector(lead_id, user, db)
 
-    lead.delete()
+    db.delete(lead)
     db.commit()
 
 async def update_lead(lead_id: int, lead: _schemas.LeadCreate, user: _schemas.User, db: _orm.Session):
