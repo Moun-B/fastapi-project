@@ -25,3 +25,12 @@ class _LeadBase(_pydantic.BaseModel):
 
 class LeadCreate(_LeadBase):
     pass
+
+class Lead(_LeadBase):
+    id: int
+    owner_id: int
+    date_created: _dt.datetime
+    last_updated: _dt.datetime
+
+    class Config:
+        orm_mode = True
