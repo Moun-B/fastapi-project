@@ -1,5 +1,6 @@
 import fastapi as _fastapi
 import fastapi.security as _security
+from typing import List
 import sqlalchemy.orm as _orm
 import services as _services, schemas as _schemas
 
@@ -31,4 +32,8 @@ async def get_user(user: _schemas.User = _fastapi.Depends(_services.get_current_
 
 @app.post("/api/leads", response_model=_schemas.Lead)
 async def create_lead(lead: _schemas.LeadCreate, user: _schemas.User=_fastapi.Depends(_services.get_current_user), db: _orm.Session=_fastapi.Depends(_services.get_db)):
+    return await _services.create_lead(user=user, db=db, lead=lead)
+
+@app.get("/api/leads", response_model=List[_schemas.Lead])
+async def get_leads(lead: _schemas.LeadCreate, user: _schemas.User=_fastapi.Depends(_services.get_current_user), db: _orm.Session=_fastapi.Depends(_services.get_db)):
     pass
