@@ -72,7 +72,9 @@ async def delete_lead(
 @app.put("/api/leads/{lead_id}", status_code=200)
 async def update_lead(
     lead_id: int,
+    lead: _schemas.LeadCreate,
     user: _schemas.User=_fastapi.Depends(_services.get_current_user),
     db: _orm.Session=_fastapi.Depends(_services.get_db),
 ):
-    pass
+    await _services.update_lead(lead_id, lead, user, db)
+    return {"message", "Lead Updated"}

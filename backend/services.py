@@ -4,6 +4,7 @@ import passlib.hash as _hash
 import fastapi as _fastapi
 import fastapi.security as _security
 import jwt as _jwt
+import datetime as _dt
 
 JWT_SECRET = "myjwtsecret"
 oauth2schema = _security.OAuth2PasswordBearer(tokenUrl="api/token")
@@ -91,3 +92,18 @@ async def delete_lead(lead_id: int, user: _schemas.User, db: _orm.Session):
 
     lead.delete()
     db.commit()
+
+async def update_lead(lead_id: int, lead: _schemas.LeadCreate, user: _schemas.User, db: _orm.Session):
+    lead_db = await _lead_selector(lead_id=lead_id, user=user, db=db)
+
+    lead_db.first_name = lead.first_name
+    lead_db.last_name = lead.last_name
+    lead_db.email = lead.email
+    lead_db.company = lead.company
+    lead_db.note = lead.note
+    lead_db.last_updated = _dt.datetime.utcnow()
+
+    db.commit()
+    db.refresh(lead_db)
+
+    return _schemas.Lead.from_orm(lead_db)
