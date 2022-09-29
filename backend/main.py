@@ -12,8 +12,9 @@ async def create_user(user: _schemas.UserCreate, db: _orm.session= _fastapi.Depe
     if db_user:
         raise _fastapi.HTTPException(status_code=400, detail="Email already used")
 
-    return await _services.create_user(user, db)
+    await _services.create_user(user, db)
 
+    return await _services.create_token(user)
 
 @app.post("/api/token")
 async def generate_token(form_data: _security.OAuth2PasswordRequestForm = _fastapi.Depends(), db: _orm.Session = _fastapi.Depends(_services.get_db)):
@@ -27,3 +28,7 @@ async def generate_token(form_data: _security.OAuth2PasswordRequestForm = _fasta
 @app.get("/api/users/me", response_model=_schemas.User)
 async def get_user(user: _schemas.User = _fastapi.Depends(_services.get_current_user)):
     return user
+
+@app.post("/api/leads", response_model=_schemas.Lead)
+async def create_lead(lead: _schemas.LeadCreate, user: _schemas.User=_fastapi.Depends(_services.get_current_user), db: _orm.Session=_fastapi.Depends(_services.get_db)):
+    pass
