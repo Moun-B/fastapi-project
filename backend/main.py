@@ -13,3 +13,8 @@ async def create_user(user: _schemas.UserCreate, db: _orm.session= _fastapi.Depe
         raise _fastapi.HTTPException(status_code=400, detail="Email already used")
 
     return await _services.create_user(user, db)
+
+
+@app.post("/api/token")
+async def generate_token(form_data: _security.OAuth2PasswordRequestForm = _fastapi.Depends(), db: _orm.Session = _fastapi.Depends(_services.get_db)):
+    pass
