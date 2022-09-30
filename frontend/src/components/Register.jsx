@@ -12,8 +12,8 @@ const Register = () => {
   const submitRegistration = async () => {
     const requestOptions = {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({email: email, hashed_password: password}),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, hashed_password: password }),
     };
 
     const response = await fetch("/api/users", requestOptions);
@@ -31,7 +31,9 @@ const Register = () => {
     if (password === confirmationPassword && password.length > 8) {
       submitRegistration();
     } else {
-      setErrorMessage("Password needs to be greater than 8 characters and to match");
+      setErrorMessage(
+        "Password needs to be greater than 8 characters and to match"
+      );
     }
   };
 
@@ -49,7 +51,7 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="input"
               required
-             />
+            />
           </div>
         </div>
         <div className="field">
@@ -62,7 +64,7 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="input"
               required
-             />
+            />
           </div>
         </div>
         <div className="field">
@@ -75,17 +77,17 @@ const Register = () => {
               onChange={(e) => setConfirmationPassword(e.target.value)}
               className="input"
               required
-             />
+            />
           </div>
         </div>
-        <ErrorMessage message={errorMessage}/>
-        <br/>
-        <button className="button is-primary" type="submit">
+        <ErrorMessage message={errorMessage} />
+        <br />
+        <button className="button is-link" type="submit">
           Register
         </button>
       </form>
     </div>
-  )
+  );
 };
 
 export default Register;

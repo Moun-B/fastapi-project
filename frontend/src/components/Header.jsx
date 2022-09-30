@@ -56,13 +56,13 @@ const Header = ({ title }) => {
                 ) : null}
                 {!token ? (
                   <button
-                    className="button is-light"
+                    className="button is-info"
                     onClick={() => toogleLogin()}
                   >
                     Log in
                   </button>
                 ) : (
-                  <button className="button is-light" onClick={handleLogout}>
+                  <button className="button is-info" onClick={handleLogout}>
                     Log out
                   </button>
                 )}

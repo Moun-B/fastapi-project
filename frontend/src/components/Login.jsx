@@ -79,19 +79,15 @@ const Login = () => {
           </div>
           <ErrorMessage message={errorMessage} />
           <br />
-          <button className="button is-primary" type="submit">
+          <button className="button is-link" type="submit">
             Login
           </button>
-          <button className="button is-info ml-3" onClick={toogleRegister}>
-            Create an account
-          </button>
-          {isRegisterShown && <Register />}
         </form>
       </div>
     );
   };
 
-  return isLoginShown ? login() : showRegister();
+  return isLoginShown && login();
 };
 
 export default Login;

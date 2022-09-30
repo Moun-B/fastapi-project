@@ -43,7 +43,9 @@ const App = () => {
       <Header title={message} />
       <div className="columns">
         <div className="column"></div>
-        <div className="column m-5 is-two-thirds">
+        <div
+          className={`column m-5 ${token ? "is-three-quarters" : "is-half"}`}
+        >
           {!token ? (
             <div className="columns">
               {isLoginShown ? <Login /> : <Register />}
