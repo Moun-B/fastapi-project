@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 
 import ErrorMessage from "./ErrorMessage";
+import LeadModal from "./LeadModal";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 import { useState, useEffect } from "react";
@@ -37,9 +38,16 @@ const Table = () => {
     getLeads();
   }, []);
 
+  const handleModal = () => {
+    setActiveModal(!activeModal);
+    getLeads();
+    setId(null);
+  }
+
   return (
     <>
-    <button className="button is-fullwidth mb-5 is-link">
+    <LeadModal active={activeModal} handleModal={handleModal} token={token} id={id} setErrorMessage={setErrorMessage}/>
+    <button className="button is-fullwidth mb-5 is-link" onClick={() => setActiveModal(true)}>
       Create Lead
     </button>
     <ErrorMessage message={errorMessage} />

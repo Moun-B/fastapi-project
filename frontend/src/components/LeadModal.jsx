@@ -17,6 +17,21 @@ const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
               {id ? "Update Lead" : "Create Lead"}
             </h1>
           </header>
+          <section className="modal-card-body">
+            <form>
+              <div className="field">
+                <label className="label">First Name</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    placeholder="Enter First Name"
+                    value={firstName} onChange={(e) => setFirstName(e.target.value)}
+                    className="input"
+                    required />
+                </div>
+              </div>
+            </form>
+          </section>
         </div>
       </div>
     </div>
