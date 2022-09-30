@@ -39,7 +39,7 @@ const App = () => {
           {
             !token ? (
               <div className="columns">
-                {token ? <Register/> : <Login/>}
+                <Register/> : <Login/>
               </div>
             ) : (
               <Table />
