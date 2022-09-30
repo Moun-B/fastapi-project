@@ -82,11 +82,11 @@ const Login = () => {
           <button className="button is-primary" type="submit">
             Login
           </button>
+          <button className="button is-info ml-3" onClick={toogleRegister}>
+            Create an account
+          </button>
+          {isRegisterShown && <Register />}
         </form>
-        <button className="button is-info" onClick={toogleRegister}>
-          Create an account
-        </button>
-        {isRegisterShown && <Register />}
       </div>
     );
   };

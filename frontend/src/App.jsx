@@ -7,8 +7,10 @@ import Table from "./components/Table";
 
 const App = () => {
   const [message, setMessage] = useState("");
-  const [token] = useContext(UserContext);
+  const [token, setToken] = useContext(UserContext);
   const [navbarBurger, setNavbarBurger] = useState(false);
+  const [isRegisterShown, setIsRegisterShown] = useState(false);
+  const [isLoginShown, setIsLoginShown] = useState(true);
 
   const getWelcomeMessage = async () => {
     const requestOptions = {
@@ -27,12 +29,19 @@ const App = () => {
     }
   };
 
+  const handleLogout = () => {
+    setToken(null);
+  };
+
   useEffect(() => {
     getWelcomeMessage();
   }, []);
 
   const handleNavbarBurger = () => {
     setNavbarBurger((current) => !current);
+  };
+  const toogleRegister = (e) => {
+    setIsLoginShown(false);
   };
 
   return (
@@ -44,7 +53,9 @@ const App = () => {
           </div>
           <a
             role="button"
-            class={navbarBurger ? "navbar-burger is-active" : "navbar-burger"}
+            className={
+              navbarBurger ? "navbar-burger is-active" : "navbar-burger"
+            }
             aria-label="menu"
             aria-expanded="false"
             onClick={handleNavbarBurger}
@@ -58,8 +69,18 @@ const App = () => {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <button className="button is-primary">Sign up</button>
-                <button className="button is-light">Log in</button>
+                {!token ? (
+                  <button className="button is-link" onClick={toogleRegister}>
+                    Register
+                  </button>
+                ) : null}
+                {!token ? (
+                  <button className="button is-light">Log in</button>
+                ) : (
+                  <button className="button is-light" onClick={handleLogout}>
+                    Log out
+                  </button>
+                )}
               </div>
             </div>
           </div>
