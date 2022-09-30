@@ -27,7 +27,54 @@ const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
                     placeholder="Enter First Name"
                     value={firstName} onChange={(e) => setFirstName(e.target.value)}
                     className="input"
-                    required />
+                    required
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Last Name</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    placeholder="Enter Last Name"
+                    value={lastName} onChange={(e) => setLastName(e.target.value)}
+                    className="input"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Company</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    placeholder="Enter Company"
+                    value={company} onChange={(e) => setCompany(e.target.value)}
+                    className="input"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Email</label>
+                <div className="control">
+                  <input
+                    type="email"
+                    placeholder="Enter Email"
+                    value={email} onChange={(e) => setEmail(e.target.value)}
+                    className="input"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Note</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    placeholder="Enter Note"
+                    value={note} onChange={(e) => setNote(e.target.value)}
+                    className="input"
+                  />
                 </div>
               </div>
             </form>
