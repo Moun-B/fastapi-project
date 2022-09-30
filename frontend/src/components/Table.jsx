@@ -4,7 +4,7 @@ import moment from "moment";
 import ErrorMessage from "./ErrorMessage";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Table = () => {
   const [token] = useContext(UserContext);
@@ -23,10 +23,40 @@ const Table = () => {
       },
     };
     const response = await fetch("/api/leads", requestOptions);
-    const data = await response.json();
 
     if (!response.ok) {
-      setErrorMessage(data.detail);
+      setErrorMessage("Couldn't load the leads");
+    } else {
+      const data = await response.json();
+      setLeads(data)
+      setLoaded(true)
     }
-  }
-}
+  };
+
+  useEffect(() => {
+    getLeads();
+  }, []);
+
+  return (
+    <>
+    <button className="button is-fullwidth mb-5 is-secondary">
+      Create Lead
+    </button>
+    <ErrorMessage message={errorMessage} />
+    { loaded && leads ? (
+      <table className="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>First Name</th>
+            <th>First Name</th>
+            <th>First Name</th>
+            <th>First Name</th>
+            <th>First Name</th>
+          </tr>
+        </thead>
+      </table>
+    ) : <p>Loading</p>}
+    </>
+  )
+};
