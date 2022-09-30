@@ -39,7 +39,7 @@ const Table = () => {
 
   return (
     <>
-    <button className="button is-fullwidth mb-5 is-secondary">
+    <button className="button is-fullwidth mb-5 is-link">
       Create Lead
     </button>
     <ErrorMessage message={errorMessage} />
@@ -48,15 +48,38 @@ const Table = () => {
         <thead>
           <tr>
             <th>First Name</th>
-            <th>First Name</th>
-            <th>First Name</th>
-            <th>First Name</th>
-            <th>First Name</th>
-            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Company</th>
+            <th>Email</th>
+            <th>Note</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
           </tr>
         </thead>
+        <tbody>
+          {leads.map((lead) => (
+            <tr key={lead.id}>
+              <td>{lead.first_name}</td>
+              <td>{lead.last_name}</td>
+              <td>{lead.company}</td>
+              <td>{lead.email}</td>
+              <td>{lead.note}</td>
+              <td>{moment(lead.last_updated).format("MMM Do YY")}</td>
+              <td>
+                <button className="button mr-2 is-info is-light">
+                  Update
+                </button>
+                <button className="button is-danger is-light">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     ) : <p>Loading</p>}
     </>
   )
 };
+
+export default Table;
