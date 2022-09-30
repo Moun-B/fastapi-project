@@ -15,6 +15,23 @@ const Table = () => {
   const [activeModal, setActiveModal] = useState(false);
   const [id, setId] = useState(null);
 
+  const handleDelete = async (id) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+    const response = await fetch(`/api/leads/${id}`, requestOptions);
+
+    if (!response.ok) {
+      setErrorMessage("Couldn't delete the lead");
+    }
+
+    getLeads();
+  }
+
   const getLeads = async () => {
     const requestOptions = {
       method: "GET",
@@ -77,7 +94,10 @@ const Table = () => {
                 <button className="button mr-2 is-info is-light">
                   Update
                 </button>
-                <button className="button is-danger is-light">
+                <button
+                  className="button is-danger is-light"
+                  onClick={() => handleDelete(lead.id)}
+                >
                   Delete
                 </button>
               </td>
