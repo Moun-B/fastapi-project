@@ -51,7 +51,7 @@ async def get_leads(
 ):
     return await _services.get_leads(user=user, db=db)
 
-@app.get("/api/leads{lead_id}", status_code=200)
+@app.get("/api/leads/{lead_id}", status_code=200)
 async def get_lead(
     lead_id: int,
     user: _schemas.User=_fastapi.Depends(_services.get_current_user),

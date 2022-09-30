@@ -15,6 +15,11 @@ const Table = () => {
   const [activeModal, setActiveModal] = useState(false);
   const [id, setId] = useState(null);
 
+  const handleUpdate = async (id) => {
+    setId(id);
+    setActiveModal(true);
+  }
+
   const handleDelete = async (id) => {
     const requestOptions = {
       method: "DELETE",
@@ -91,7 +96,10 @@ const Table = () => {
               <td>{lead.note}</td>
               <td>{moment(lead.last_updated).format("MMM Do YY")}</td>
               <td>
-                <button className="button mr-2 is-info is-light">
+                <button
+                  className="button mr-2 is-info is-light"
+                  onClick={() => handleUpdate(lead.id)}
+                >
                   Update
                 </button>
                 <button
