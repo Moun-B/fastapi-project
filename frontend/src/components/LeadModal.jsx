@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
+const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [company, setCompany] = useState("");
@@ -18,7 +18,7 @@ const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
           Authorization: "Bearer " + token,
         },
       };
-      const response = await fetch(`/api/leads/${id}`, requestOptions)
+      const response = await fetch(`/api/leads/${id}`, requestOptions);
 
       if (!response.ok) {
         setErrorMessage("Couldn't get the lead");
@@ -101,7 +101,7 @@ const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
     <div className={`modal ${active && "is-active"}`}>
       <div className="modal-background" onClick={handleModal}></div>
       <div className="modal-card">
-        <header className="modal-card-head has-background-primary-light">
+        <header className="modal-card-head has-background-link-light">
           <h1 className="modal-card-title">
             {id ? "Update Lead" : "Create Lead"}
           </h1>
@@ -114,7 +114,8 @@ const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
                 <input
                   type="text"
                   placeholder="Enter First Name"
-                  value={firstName} onChange={(e) => setFirstName(e.target.value)}
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   className="input"
                   required
                 />
@@ -126,7 +127,8 @@ const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
                 <input
                   type="text"
                   placeholder="Enter Last Name"
-                  value={lastName} onChange={(e) => setLastName(e.target.value)}
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   className="input"
                   required
                 />
@@ -138,7 +140,8 @@ const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
                 <input
                   type="text"
                   placeholder="Enter Company"
-                  value={company} onChange={(e) => setCompany(e.target.value)}
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
                   className="input"
                   required
                 />
@@ -150,7 +153,8 @@ const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
                 <input
                   type="email"
                   placeholder="Enter Email"
-                  value={email} onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="input"
                 />
               </div>
@@ -161,14 +165,15 @@ const LeadModal = ({active, handleModal, token, id, setErrorMessage}) => {
                 <input
                   type="text"
                   placeholder="Enter Note"
-                  value={note} onChange={(e) => setNote(e.target.value)}
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
                   className="input"
                 />
               </div>
             </div>
           </form>
         </section>
-        <footer className="modal-card-foot has-background-primary-light">
+        <footer className="modal-card-foot has-background-link-light">
           {id ? (
             <button className="button is-info" onClick={handleUpdateLead}>
               Update

@@ -33,7 +33,6 @@ const Table = () => {
     if (!response.ok) {
       setErrorMessage("Couldn't delete the lead");
     }
-
     getLeads();
   };
 

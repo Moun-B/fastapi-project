@@ -5,6 +5,16 @@ export const UserContext = createContext();
 
 export const UserProvider = (props) => {
   const [token, setToken] = useState(localStorage.getItem("LeadsToken"));
+  const [isLoginShown, setIsLoginShown] = useState(true);
+  const [isRegisterShown, setIsRegisterShown] = useState(false);
+
+  const toogleRegister = () => {
+    setIsLoginShown(false);
+  };
+
+  const toogleLogin = () => {
+    setIsLoginShown(true);
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -20,14 +30,23 @@ export const UserProvider = (props) => {
       if (!response.ok) {
         setToken(null);
       }
-        localStorage.setItem("LeadsToken", token);
+      localStorage.setItem("LeadsToken", token);
     };
     fetchUser();
-  }, [token])
+  }, [token]);
 
   return (
-    <UserContext.Provider value={[token, setToken]}>
+    <UserContext.Provider
+      value={[
+        token,
+        setToken,
+        toogleRegister,
+        isLoginShown,
+        toogleLogin,
+        isRegisterShown,
+      ]}
+    >
       {props.children}
     </UserContext.Provider>
-  )
-}
+  );
+};

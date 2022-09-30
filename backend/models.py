@@ -4,6 +4,7 @@ import sqlalchemy.orm as _orm
 import passlib.hash as _hash
 import database as _database
 
+
 class User(_database.Base):
     __tablename__ = "users"
     id = _sql.Column(_sql.Integer, primary_key=True, index=True)
@@ -14,6 +15,7 @@ class User(_database.Base):
 
     def verify_password(self, password: str):
         return _hash.bcrypt.verify(password, self.hashed_password)
+
 
 class Lead(_database.Base):
     __tablename__ = "leads"
