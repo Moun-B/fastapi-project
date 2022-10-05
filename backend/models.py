@@ -34,4 +34,5 @@ class Lead(_database.Base):
     owner = _orm.relationship("User", back_populates="leads")
 
 
+# Create the tables
 # _database.Base.metadata.create_all(_database.engine)

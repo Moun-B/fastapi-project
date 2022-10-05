@@ -82,7 +82,7 @@ const Table = () => {
       </button>
       <ErrorMessage message={errorMessage} />
       {loaded && leads ? (
-        <div class="table-container">
+        <div className="table-container">
           <table className="table is-fullwidth">
             <thead>
               <tr>
