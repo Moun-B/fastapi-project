@@ -48,7 +48,7 @@ const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
   const handleCreateLead = async (e) => {
     e.preventDefault();
     const requestOptions = {
-      method: "POST",
+      method: id ? "PUT" : "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
@@ -61,13 +61,22 @@ const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
         note: note,
       }),
     };
-    const response = await fetch("/api/leads", requestOptions);
-
-    if (!response.ok) {
-      setErrorMessage("Cannot create the Lead");
+    if (id) {
+      const response = await fetch(`/api/leads/${id}`, requestOptions);
+      if (!response.ok) {
+        setErrorMessage("Couldn't update the lead");
+      } else {
+        cleanFormData();
+        handleModal();
+      }
     } else {
-      cleanFormData();
-      handleModal();
+      const response = await fetch(`/api/leads`, requestOptions);
+      if (!response.ok) {
+        setErrorMessage("Cannot create the Lead");
+      } else {
+        cleanFormData();
+        handleModal();
+      }
     }
   };
 
@@ -107,7 +116,7 @@ const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
           </h1>
         </header>
         <section className="modal-card-body">
-          <form>
+          <form onSubmit={handleCreateLead}>
             <div className="field">
               <label className="label">First Name</label>
               <div className="control">
@@ -171,22 +180,25 @@ const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
                 />
               </div>
             </div>
+            <footer className="modal-card-foot has-background-link-light">
+              {id ? (
+                <button type="submit" className="button is-info">
+                  Update
+                </button>
+              ) : (
+                <button type="submit" className="button is-link">
+                  Create
+                </button>
+              )}
+              <input
+                type="button"
+                value="Cancel"
+                className="button"
+                onClick={handleModal}
+              ></input>
+            </footer>
           </form>
         </section>
-        <footer className="modal-card-foot has-background-link-light">
-          {id ? (
-            <button className="button is-info" onClick={handleUpdateLead}>
-              Update
-            </button>
-          ) : (
-            <button className="button is-link" onClick={handleCreateLead}>
-              Create
-            </button>
-          )}
-          <button className="button" onClick={handleModal}>
-            Cancel
-          </button>
-        </footer>
       </div>
     </div>
   );

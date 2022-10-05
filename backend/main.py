@@ -89,4 +89,4 @@ async def update_lead(
 
 @app.get("/api")
 async def root():
-    return {"message": "Welcome to our API"}
+    return {"message": "Welcome to Leads Manager API app"}

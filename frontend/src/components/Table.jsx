@@ -82,45 +82,47 @@ const Table = () => {
       </button>
       <ErrorMessage message={errorMessage} />
       {loaded && leads ? (
-        <table className="table is-fullwidth">
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Company</th>
-              <th>Email</th>
-              <th>Note</th>
-              <th>Last Updated</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leads.map((lead) => (
-              <tr key={lead.id}>
-                <td>{lead.first_name}</td>
-                <td>{lead.last_name}</td>
-                <td>{lead.company}</td>
-                <td>{lead.email}</td>
-                <td>{lead.note}</td>
-                <td>{moment(lead.last_updated).format("MMM Do YY")}</td>
-                <td>
-                  <button
-                    className="button mr-2 is-info is-light"
-                    onClick={() => handleUpdate(lead.id)}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="button is-danger is-light"
-                    onClick={() => handleDelete(lead.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div class="table-container">
+          <table className="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Note</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {leads.map((lead) => (
+                <tr key={lead.id}>
+                  <td>{lead.first_name}</td>
+                  <td>{lead.last_name}</td>
+                  <td>{lead.company}</td>
+                  <td>{lead.email}</td>
+                  <td>{lead.note}</td>
+                  <td>{moment(lead.last_updated).format("MMM Do YY")}</td>
+                  <td>
+                    <button
+                      className="button mr-2 is-info is-light"
+                      onClick={() => handleUpdate(lead.id)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="button is-danger is-light"
+                      onClick={() => handleDelete(lead.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p>Loading</p>
       )}

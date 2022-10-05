@@ -11,7 +11,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [, setToken] = useContext(UserContext);
-  const [isRegisterShown, setIsRegisterShown] = useState(false);
   const [isLoginShown, setIsLoginShown] = useState(true);
 
   const submitLogin = async () => {
@@ -36,14 +35,6 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     submitLogin();
-  };
-
-  const toogleRegister = (e) => {
-    setIsLoginShown(false);
-  };
-
-  const showRegister = () => {
-    return <Register />;
   };
 
   const login = () => {

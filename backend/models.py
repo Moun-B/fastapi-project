@@ -1,8 +1,10 @@
 import datetime as _dt
+from typing_extensions import Required
 import sqlalchemy as _sql
 import sqlalchemy.orm as _orm
 import passlib.hash as _hash
 import database as _database
+from sqlalchemy.orm import validates
 
 
 class User(_database.Base):
@@ -30,3 +32,9 @@ class Lead(_database.Base):
     last_updated = _sql.Column(_sql.DateTime, default=_dt.datetime.utcnow)
 
     owner = _orm.relationship("User", back_populates="leads")
+
+    @validates("first_name")
+    def validate_first_name(self, key, name):
+        if name == "":
+            raise ValueError("Required field")
+        return name

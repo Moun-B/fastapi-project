@@ -35,7 +35,6 @@ const App = () => {
 
   useEffect(() => {
     getWelcomeMessage();
-    console.log(isLoginShown);
   }, []);
 
   return (
