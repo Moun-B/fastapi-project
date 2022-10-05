@@ -1,4 +1,5 @@
 import datetime as _dt
+from importlib import metadata
 from typing_extensions import Required
 import sqlalchemy as _sql
 import sqlalchemy.orm as _orm
@@ -23,8 +24,7 @@ class Lead(_database.Base):
     __tablename__ = "leads"
     id = _sql.Column(_sql.Integer, primary_key=True, index=True)
     owner_id = _sql.Column(_sql.Integer, _sql.ForeignKey("users.id"))
-    first_name = _sql.Column(_sql.String, index=True)
-    last_name = _sql.Column(_sql.String, index=True)
+    name = _sql.Column(_sql.String, index=True)
     email = _sql.Column(_sql.String, index=True)
     company = _sql.Column(_sql.String, index=True, default="")
     note = _sql.Column(_sql.String, default="")
@@ -33,8 +33,5 @@ class Lead(_database.Base):
 
     owner = _orm.relationship("User", back_populates="leads")
 
-    @validates("first_name")
-    def validate_first_name(self, key, name):
-        if name == "":
-            raise ValueError("Required field")
-        return name
+
+# _database.Base.metadata.create_all(_database.engine)

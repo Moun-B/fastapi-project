@@ -118,8 +118,7 @@ async def update_lead(
 ):
     lead_db = await _lead_selector(lead_id=lead_id, user=user, db=db)
 
-    lead_db.first_name = lead.first_name
-    lead_db.last_name = lead.last_name
+    lead_db.name = lead.name
     lead_db.email = lead.email
     lead_db.company = lead.company
     lead_db.note = lead.note

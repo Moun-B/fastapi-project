@@ -86,8 +86,7 @@ const Table = () => {
           <table className="table is-fullwidth">
             <thead>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Company</th>
                 <th>Email</th>
                 <th>Note</th>
@@ -98,8 +97,7 @@ const Table = () => {
             <tbody>
               {leads.map((lead) => (
                 <tr key={lead.id}>
-                  <td>{lead.first_name}</td>
-                  <td>{lead.last_name}</td>
+                  <td>{lead.name}</td>
                   <td>{lead.company}</td>
                   <td>{lead.email}</td>
                   <td>{lead.note}</td>

@@ -3,8 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [note, setNote] = useState("");
@@ -24,8 +23,7 @@ const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
         setErrorMessage("Couldn't get the lead");
       } else {
         const data = await response.json();
-        setFirstName(data.first_name);
-        setLastName(data.last_name);
+        setName(data.name);
         setCompany(data.company);
         setEmail(data.email);
         setNote(data.note);
@@ -38,8 +36,7 @@ const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
   }, [id, token]);
 
   const cleanFormData = () => {
-    setFirstName("");
-    setLastName("");
+    setName("");
     setCompany("");
     setEmail("");
     setNote("");
@@ -54,8 +51,7 @@ const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
+        name: name,
         company: company,
         email: email,
         note: note,
@@ -89,8 +85,7 @@ const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
+        name: name,
         company: company,
         email: email,
         note: note,
@@ -118,26 +113,13 @@ const LeadModal = ({ active, handleModal, token, id, setErrorMessage }) => {
         <section className="modal-card-body">
           <form onSubmit={handleCreateLead}>
             <div className="field">
-              <label className="label">First Name</label>
+              <label className="label">Name</label>
               <div className="control">
                 <input
                   type="text"
-                  placeholder="Enter First Name"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className="input"
-                  required
-                />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Last Name</label>
-              <div className="control">
-                <input
-                  type="text"
-                  placeholder="Enter Last Name"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Enter Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="input"
                   required
                 />
