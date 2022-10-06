@@ -7,7 +7,7 @@ import services as _services, schemas as _schemas
 app = _fastapi.FastAPI()
 
 
-@app.post("/api/users")
+@app.post("/users")
 async def create_user(
     user: _schemas.UserCreate,
     db: _orm.session = _fastapi.Depends(_services.get_db),
@@ -22,7 +22,7 @@ async def create_user(
     return await _services.create_token(user)
 
 
-@app.post("/api/token")
+@app.post("/token")
 async def generate_token(
     form_data: _security.OAuth2PasswordRequestForm = _fastapi.Depends(),
     db: _orm.Session = _fastapi.Depends(_services.get_db),
@@ -35,12 +35,12 @@ async def generate_token(
     return await _services.create_token(user)
 
 
-@app.get("/api/users/me", response_model=_schemas.User)
+@app.get("/users/me", response_model=_schemas.User)
 async def get_user(user: _schemas.User = _fastapi.Depends(_services.get_current_user)):
     return user
 
 
-@app.post("/api/leads", response_model=_schemas.Lead)
+@app.post("/leads", response_model=_schemas.Lead)
 async def create_lead(
     lead: _schemas.LeadCreate,
     user: _schemas.User = _fastapi.Depends(_services.get_current_user),
@@ -49,7 +49,7 @@ async def create_lead(
     return await _services.create_lead(user=user, db=db, lead=lead)
 
 
-@app.get("/api/leads", response_model=List[_schemas.Lead])
+@app.get("/leads", response_model=List[_schemas.Lead])
 async def get_leads(
     user: _schemas.User = _fastapi.Depends(_services.get_current_user),
     db: _orm.Session = _fastapi.Depends(_services.get_db),
@@ -57,7 +57,7 @@ async def get_leads(
     return await _services.get_leads(user=user, db=db)
 
 
-@app.get("/api/leads/{lead_id}", status_code=200)
+@app.get("/leads/{lead_id}", status_code=200)
 async def get_lead(
     lead_id: int,
     user: _schemas.User = _fastapi.Depends(_services.get_current_user),
@@ -66,7 +66,7 @@ async def get_lead(
     return await _services.get_lead(lead_id, user, db)
 
 
-@app.delete("/api/leads/{lead_id}", status_code=204)
+@app.delete("/leads/{lead_id}", status_code=204)
 async def delete_lead(
     lead_id: int,
     user: _schemas.User = _fastapi.Depends(_services.get_current_user),
@@ -76,7 +76,7 @@ async def delete_lead(
     return {"message": "Lead Deleted"}
 
 
-@app.put("/api/leads/{lead_id}", status_code=200)
+@app.put("/leads/{lead_id}", status_code=200)
 async def update_lead(
     lead_id: int,
     lead: _schemas.LeadCreate,
@@ -87,6 +87,6 @@ async def update_lead(
     return {"message": "Lead Updated"}
 
 
-@app.get("/api")
+@app.get("/")
 async def root():
     return {"message": "Welcome to Leads Manager API app"}
